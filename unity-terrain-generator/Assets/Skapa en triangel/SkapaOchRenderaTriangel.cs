@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SkapaOchRenderaTriangel : MonoBehaviour {
 	[SerializeField]
-	private float maxX = 10.0f;
+	private float maxX = 1.0f;
 
 	[SerializeField]
-	private float maxY = 10.0f;
+	private float maxY = 1.0f;
 
 	private Mesh mesh;
 
@@ -21,8 +21,8 @@ public class SkapaOchRenderaTriangel : MonoBehaviour {
 
 		Vector3[] vertices = new Vector3[3] {
 			new Vector3(0, 0, 0),
-			new Vector3(1, 0, 0),
-			new Vector3(1, 1, 0),
+			new Vector3(Random.Range(0.0f, 2.0f), 0, 0),
+			new Vector3(Random.Range(0.0f, 2.0f), Random.Range(0.0f, 2.0f), 0),
 		};
 		mesh.vertices = vertices;
 
