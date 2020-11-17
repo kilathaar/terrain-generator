@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Domain.Entity;
 
 public class SkapaOchRenderaTriangel : MonoBehaviour {
 	[SerializeField]
@@ -20,9 +21,9 @@ public class SkapaOchRenderaTriangel : MonoBehaviour {
 		MeshFilter meshFilter = gameObject.AddComponent<MeshFilter>();
 
 		Vector3[] vertices = new Vector3[3] {
-			new Vector3(0, 0, 0),
-			new Vector3(Random.Range(0.0f, 2.0f), 0, 0),
-			new Vector3(Random.Range(0.0f, 2.0f), Random.Range(0.0f, 2.0f), 0),
+			CreateVector3(new Position(0, 0, 0)),
+			CreateVector3(new Position(Random.Range(0.0f, 2.0f), 0, 0)),
+			CreateVector3(new Position(Random.Range(0.0f, 2.0f), Random.Range(0.0f, 2.0f), 0))
 		};
 		mesh.vertices = vertices;
 
@@ -42,8 +43,7 @@ public class SkapaOchRenderaTriangel : MonoBehaviour {
 		meshFilter.mesh = mesh;
 	}
 
-	// Update is called once per frame
-	void Update() {
-
+	private Vector3 CreateVector3(Position position) {
+		return new Vector3(position.x, position.y, position.z);
 	}
 }
