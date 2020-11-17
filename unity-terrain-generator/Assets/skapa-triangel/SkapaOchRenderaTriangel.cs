@@ -38,7 +38,7 @@ public class SkapaOchRenderaTriangel : MonoBehaviour {
 			Vector3.forward,
 			Vector3.forward
 		};
-		mesh.normals = normals;
+		mesh.RecalculateNormals();
 
 		meshFilter.mesh = mesh;
 	}
