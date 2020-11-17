@@ -22,8 +22,8 @@ public class SkapaOchRenderaTriangel : MonoBehaviour {
 
 		Vector3[] vertices = new Vector3[3] {
 			CreateVector3(new Position(0, 0, 0)),
-			CreateVector3(new Position(Random.Range(0.0f, 2.0f), 0, 0)),
-			CreateVector3(new Position(Random.Range(0.0f, 2.0f), Random.Range(0.0f, 2.0f), 0))
+			CreateVector3(new Position(RandomValue(), 0, 0)),
+			CreateVector3(new Position(RandomValue(), RandomValue(), 0))
 		};
 		mesh.vertices = vertices;
 
@@ -45,5 +45,9 @@ public class SkapaOchRenderaTriangel : MonoBehaviour {
 
 	private Vector3 CreateVector3(Position position) {
 		return new Vector3(position.x, position.y, position.z);
+	}
+
+	private float RandomValue() {
+		return Random.Range(0.0f, 2.0f);
 	}
 }
