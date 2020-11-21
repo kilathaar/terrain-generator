@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
 public class MeshGenerator {
-	private readonly int resolutionY;
+	private readonly int resolutionZ;
 
 	private Vector3[] vertices;
 	private int[] triangles;
 	private Color32[] vertexColours;
 
-	public MeshGenerator(int resolutionX, int resolutionY) {
-		this.resolutionY = resolutionY;
+	public MeshGenerator(int resolutionX, int resolutionZ) {
+		this.resolutionZ = resolutionZ;
 
-		vertices = CreateVertices(resolutionX, resolutionY);
-		triangles = CreateTriangles(resolutionX, resolutionY);
-		vertexColours = CreateColours(resolutionX, resolutionY);
+		vertices = CreateVertices(resolutionX, resolutionZ);
+		triangles = CreateTriangles(resolutionX, resolutionZ);
+		vertexColours = CreateColours(resolutionX, resolutionZ);
 	}
 
 	public Mesh CreatePlane() {
@@ -24,12 +24,12 @@ public class MeshGenerator {
 		return mesh;
 	}
 
-	private Vector3[] CreateVertices(int resolutionX, int resolutionY) {
-		var vertices = new Vector3[resolutionX * resolutionY];
+	private Vector3[] CreateVertices(int resolutionX, int resolutionz) {
+		var vertices = new Vector3[resolutionX * resolutionz];
 
 		for(int x = 0; x < resolutionX; x++) {
-			for(int y = 0; y < resolutionY; y++) {
-				vertices[VertexIndex(x, y)] = new Vector3(x, y, 0);
+			for(int z = 0; z < resolutionz; z++) {
+				vertices[VertexIndex(x, z)] = new Vector3(x, 0, z);
 			}
 		}
 
@@ -41,27 +41,27 @@ public class MeshGenerator {
 		var random = new System.Random();
 
 		for(int x = 0; x < resolutionX; x++) {
-			for(int y = 0; y < resolutionY; y++) {
-				colours[VertexIndex(x, y)] = CreateRandomColour(random);
+			for(int z = 0; z < resolutionY; z++) {
+				colours[VertexIndex(x, z)] = CreateRandomColour(random);
 			}
 		}
 
 		return colours;
 	}
 
-	private int[] CreateTriangles(int resolutionX, int resolutionY) {
-		var numberOfSquares = (resolutionX - 1) * (resolutionY - 1);
+	private int[] CreateTriangles(int resolutionX, int resolutionZ) {
+		var numberOfSquares = (resolutionX - 1) * (resolutionZ - 1);
 		var triangles = new int[numberOfSquares * 6];
 
 		for(int x = 0; x < resolutionX - 1; x++) {
-			for(int y = 0; y < resolutionY - 1; y++) {
-				var index = TriangleIndex(x, y) * 6;
-				triangles[0 + index] = VertexIndex(0 + x, 0 + y);
-				triangles[1 + index] = VertexIndex(0 + x, 1 + y);
-				triangles[2 + index] = VertexIndex(1 + x, 1 + y);
-				triangles[3 + index] = VertexIndex(0 + x, 0 + y);
-				triangles[4 + index] = VertexIndex(1 + x, 1 + y);
-				triangles[5 + index] = VertexIndex(1 + x, 0 + y);
+			for(int z = 0; z < resolutionZ - 1; z++) {
+				var index = TriangleIndex(x, z) * 6;
+				triangles[0 + index] = VertexIndex(0 + x, 0 + z);
+				triangles[1 + index] = VertexIndex(0 + x, 1 + z);
+				triangles[2 + index] = VertexIndex(1 + x, 1 + z);
+				triangles[3 + index] = VertexIndex(0 + x, 0 + z);
+				triangles[4 + index] = VertexIndex(1 + x, 1 + z);
+				triangles[5 + index] = VertexIndex(1 + x, 0 + z);
 			}
 		}
 		return triangles;
@@ -71,11 +71,11 @@ public class MeshGenerator {
 		return new Color32((byte) random.Next(0, 255), (byte) random.Next(0, 255), (byte) random.Next(0, 255), 255);
 	}
 
-	private int TriangleIndex(int x, int y) {
-		return x * (resolutionY - 1) + y;
+	private int TriangleIndex(int x, int z) {
+		return x * (resolutionZ - 1) + z;
 	}
 
-	private int VertexIndex(int x, int y) {
-		return x * resolutionY + y;
+	private int VertexIndex(int x, int z) {
+		return x * resolutionZ + z;
 	}
 }
