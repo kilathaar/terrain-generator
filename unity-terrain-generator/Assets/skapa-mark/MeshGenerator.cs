@@ -2,13 +2,14 @@
 
 public class MeshGenerator {
 	private readonly int resolutionZ;
-
+	private readonly float scale;
 	private Vector3[] vertices;
 	private int[] triangles;
 	private Color32[] vertexColours;
 
-	public MeshGenerator(int resolutionX, int resolutionZ) {
+	public MeshGenerator(int resolutionX, int resolutionZ, float scale) {
 		this.resolutionZ = resolutionZ;
+		this.scale = scale;
 
 		vertices = CreateVertices(resolutionX, resolutionZ);
 		triangles = CreateTriangles(resolutionX, resolutionZ);
@@ -29,7 +30,7 @@ public class MeshGenerator {
 
 		for(int x = 0; x < resolutionX; x++) {
 			for(int z = 0; z < resolutionz; z++) {
-				vertices[VertexIndex(x, z)] = new Vector3(x, 0, z);
+				vertices[VertexIndex(x, z)] = new Vector3(x * scale, 0, z * scale);
 			}
 		}
 
